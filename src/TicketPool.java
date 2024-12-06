@@ -1,9 +1,12 @@
+import org.apache.log4j.Logger;
+
 import java.util.List;
 import java.util.Vector;
 
 public class TicketPool {
     private int maximumTicketCapacity;
     private List <Ticket> ticketList;
+    private static Logger logger = Logger.getLogger(TicketPool.class);
 
     public TicketPool(int maximumTicketCapacity){
         this.maximumTicketCapacity = maximumTicketCapacity;
@@ -23,13 +26,14 @@ public class TicketPool {
             try {
                 wait();
             } catch (InterruptedException e) {
+                logger.error(e);
                 throw new RuntimeException(e.getMessage());
             }
         }
 
         this.ticketList.add(ticket);
+        logger.info("Ticket added by - " + Thread.currentThread().getName() + " - current size is - " + ticketList.size());
         notifyAll();
-        System.out.println("Ticket added by - " + Thread.currentThread().getName() + " - current size is - " + ticketList.size());
 
     }
 
@@ -38,13 +42,14 @@ public class TicketPool {
             try {
                 wait();
             } catch (InterruptedException e) {
+                logger.error(e);
                 throw new RuntimeException(e.getMessage());
             }
         }
 
         Ticket ticket = ticketList.removeFirst();
+        logger.info("Ticket bought by - " + Thread.currentThread().getName() + " - current size is - " + ticketList.size() + " - Ticket is - " + ticket);
         notifyAll();
-        System.out.println("Ticket bought by - " + Thread.currentThread().getName() + " - current size is - " + ticketList.size() + " - Ticket is - " + ticket);
         return ticket;
     }
 }

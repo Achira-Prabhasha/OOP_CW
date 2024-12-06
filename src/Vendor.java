@@ -36,7 +36,7 @@ public class Vendor implements Runnable{
     }
     @Override
     public void run(){
-        for (int i = 0; i < 5 ; i++){
+        for (int i = 0; i < ticketsPerRelease ; i++){
             Ticket ticket = new Ticket(10+i, "aaa", 4500 );
             ticketPool.addTicket(ticket);
         }

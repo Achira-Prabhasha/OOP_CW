@@ -41,7 +41,7 @@ public class Customer implements Runnable {
         }
         for (int i = 0; i < 5; i++){
             Ticket ticket = ticketPool.removeTicket();
-            System.out.println(ticket.toString());
+            //System.out.println(ticket.toString());
         }
 
     }

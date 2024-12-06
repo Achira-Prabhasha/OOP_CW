@@ -66,7 +66,7 @@ public class ConfigurationInterface {
         try{
             FileReader reader = new FileReader("Example.json");
             ConfigurationInterface data = gson.fromJson(reader,ConfigurationInterface.class);
-            System.out.println(data.toString());
+            //System.out.println(data.toString());
         }catch (FileNotFoundException e){
             throw new RuntimeException(e);
         }
